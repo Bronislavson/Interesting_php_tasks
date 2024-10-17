@@ -36,13 +36,13 @@ function normalizeString($string) {
     return mb_strtolower($normalizedString);
 }
 
-function areSimilar($string1, $string2) {
-    return normalizeString($string1) === normalizeString($string2);
+function areSimilar($string_1, $string_2) {
+    return normalizeString($string_1) === normalizeString($string_2);
 }
 
 // Примеры использования
-$string1 = "привет";
-$string2 = "privet";
+$string_1 = "привет";
+$string_2 = "privet";
 
 if (areSimilar($string1, $string2)) {
     echo "Строки похожи.";
