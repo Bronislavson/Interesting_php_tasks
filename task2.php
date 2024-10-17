@@ -2,6 +2,7 @@
 
 /* Задача 2
 *   Проверка на похожесть слов
+*    Checking for similarity of words
 *   
 *   Некоторые слова выглядят одинаково, если заменить русскую букву на английскую и наоборот. Например,
 *   русская и английская буквы "o", а также "H" и другие, совпадают. Это может создать проблемы на сайте,
@@ -53,7 +54,6 @@ if (areSimilar($string1, $string2)) {
 // Проверка
 var_dump(areSimilar("привет", "privet")); // true
 var_dump(areSimilar("шашка", "shashka")); // true
-var_dump(areSimilar("пучина", "puchina")); // true
 var_dump(areSimilar("удивительный", "udivitelnyy")); // true
 var_dump(areSimilar("хряк", "hryak")); // false
 
