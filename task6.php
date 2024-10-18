@@ -14,7 +14,7 @@
 //Вариант 1
 
 //функция transliterate, которая принимает один аргумент - строку $text.
-/* function transliterate($text) {
+function transliterate($text) {
     //массив $transliteration, который представляет собой словарь замены. Он содержит пары "русская буква" => "английский эквивалент"
     $transliteration = [
         'а' => 'a', 'б' => 'b', 'в' => 'v', 'г' => 'g',
@@ -86,7 +86,7 @@ function transliterateFilesInDirectory($directory) {
 
 // Пример использования
 $directory = 'task6'; // Укажите путь к папке с файлами
-transliterateFilesInDirectory($directory); */
+transliterateFilesInDirectory($directory);
 
 /* 
 Итог варианта 1
@@ -95,39 +95,5 @@ transliterateFilesInDirectory($directory); */
 Файл 'пример3.js' переименован в 'primer3.js'.
 */
 
-
-/* 
-ВАРИК 2
-Получилось переименовать, а в первом варианте переименовать и создать новые
-еще ремарка в данном варианте обязательно необходимо было подключить в php.ini расширение intl
-*/
-
-
-// Получаем список файлов и директорий
-$paths = scandir('./task6/');
-// Фильтруем только файлы (исключаем . и ..)
-$filteredPaths = array_filter($paths, function($path) {
-    return $path !== '.' && $path !== '..';
-});
-// Применяем транслитерацию
-array_walk($filteredPaths, function (&$path) {
-    $transliteratedPath = transliterator_transliterate('Russian-Latin/BGN', $path);
-    // переименоваем файлы
-    rename("./task6/$path", "./task6/$transliteratedPath");
-    // Для вывода результата в консоль
-    echo "Original: $path, Transliterated: $transliteratedPath\n";
-});
-
-
-
-$paths = scandir('./task6/');
-$filteredPaths = array_filter($paths, function($path) {
-    return $path !== '.' && $path !== '..';
-});
-array_walk($filteredPaths, function (&$path) {
-    $transliteratedPath = transliterator_transliterate('Russian-Latin/BGN', $path);
-    rename("./task6/$path", "./task6/$transliteratedPath");
-    echo "Original: $path, Transliterated: $transliteratedPath\n";
-});
 
 ?>
