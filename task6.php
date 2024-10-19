@@ -105,6 +105,6 @@ transliterateFilesInDirectory($directory);
 Файл 'пример2.php' переименован в 'primer2.php'.
 Файл 'пример3.js' переименован в 'primer3.js'.
 */
-
+/* Вариант 2 интереснее */
 
 ?>
