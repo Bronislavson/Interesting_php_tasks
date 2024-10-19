@@ -18,8 +18,8 @@
 
 class InvestmentManager {
     private $dailySavings = 2000; // Ежедневная сумма, которую откладывает персонаж
-    private $initialRate = 0.015; // Начальная ставка (1,5% в месяц)
-    private $rateDrop = 0.0004; // Снижение ставки каждые два месяца
+    private $initialRate = 0.01; // Начальная ставка (1,5% в месяц)
+    private $rateDrop = 0.000003; // Снижение ставки каждые два месяца
     private $investmentDuration = 61; // Дни жизни вклада (60+1)
     private $bankDeposits = []; // Массив для хранения вкладов
     private $startDate; // Дата начала процесса
@@ -70,6 +70,22 @@ class InvestmentManager {
         ];
     }
 
+    /* ТУТ вставка, для того чтобы не писать о каждом вкладе отдельно, если мы
+    в курсе о ом что вклад происходит каждый месяц, если нет - удалить =================== */
+
+    // Открываем вклады на несколько месяцев вперед
+    public function openDepositsForMonths($startDate, $endDate) {
+        $startDate = new DateTime($startDate);
+        $endDate = new DateTime($endDate);
+
+        while ($startDate <= $endDate) {
+            $this->openNewDeposit($startDate->format('Y-m-d'));
+            // Переходим к следующему месяцу
+            $startDate->modify('first day of next month');
+        }
+    }
+    /* ============================================= */
+
     // Рассчитываем проценты по каждому вкладу на текущую дату
     public function calculateBankDeposits($currentDate) {
         $currentDate = new DateTime($currentDate);
@@ -110,15 +126,17 @@ class InvestmentManager {
 // Пример использования
 $investmentManager = new InvestmentManager('2024-07-01');
 
-// Пример открытия вкладов
-$investmentManager->openNewDeposit('2024-08-01');
+// Пример открытия вкладов, в том случае если пишем каждый вклад отдельно
+/* $investmentManager->openNewDeposit('2024-08-01');
 $investmentManager->openNewDeposit('2024-09-01');
 $investmentManager->openNewDeposit('2024-10-01');
-$investmentManager->openNewDeposit('2024-11-01');
+$investmentManager->openNewDeposit('2024-11-01'); */
+
+$investmentManager->openDepositsForMonths('2024-08-01', '2025-12-01');
 
 
 // Получаем сумму на определенную дату
-$result = $investmentManager->getTotalAmountOnDate('2024-11-19');
+$result = $investmentManager->getTotalAmountOnDate('2025-12-19');
 
 echo "Сумма в копилке: " . $result['piggyBank'] . " руб.\n";
 echo "Сумма в банке: " . $result['bankDeposits'] . " руб.\n";
